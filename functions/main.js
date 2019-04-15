@@ -1,33 +1,28 @@
 "use strict";
 
 let secretData = {
-  aaa: 0,
-  bbb: 1
-}
+    aaa: 1,
+    bbb: 0
+};
 
-function getPersonData() {
-  function realName() {
-    let realNameObj = new Object;
-    for (let key in secretData) {
-      let value = secretData[key];
-      if (key == "aaa") {
-        realNameObj.firstName;
-        if (value == 0) {
-          realNameObj.firstName = "Родриго";
-        } else {
-          realNameObj.firstName = "Эмильо";
-        }
-      } else {
-        realNameObj.lastName;
-        if (value == 0) {
-          realNameObj.lastName = "Родриго";
-        } else {
-          realNameObj.lastName = "Эмильо";
-        }
-      }
-    }
-    return(realNameObj);
+function getPersonData (obj) {
+  let realName = {};
+  realName = secretService (obj.aaa, obj.bbb)
+
+  function secretService(a, b) {
+  if (a == 0) {
+    realName.firstName = 'Родриго';
+  } else {
+    realName.firstName = 'Эмильо';
   }
-  console.log(realName(secretData));
+  if (b == 0) {
+    realName.lastName = 'Родриго';
+  } else {
+    realName.lastName = 'Эмильо';
+  }
+  return(realName);
 }
-getPersonData(secretData);
+  
+  console.log(realName);
+}
+getPersonData(secretData)
