@@ -1,28 +1,40 @@
 "use strict";
 
-let secretData = {
-    aaa: 1,
-    bbb: 0
-};
+let solution = new Object;
 
-function getPersonData (obj) {
-  let realName = {};
-  realName = secretService (obj.aaa, obj.bbb)
+function getSolutions(a, b, c) {
+  let d = Math.pow(b, 2) - 4 * a * c;
+  let x1, x2;
+  if (d < 0) {
+    solution.D = d;
+  } else if (d == 0) {
+    x1 = -b / (2 * a);
+    solution.D = d;
+    solution.roots = [x1];
+  } else {
+    x1 = (-b + Math.sqrt(d)) / (2 * a);
+    x2 = (-b - Math.sqrt(d)) / (2 * a);
+    solution.D = d;
+    solution.roots = [x1, x2];
+  }
+  //console.log(solution);
+  return solution;
+}
 
-  function secretService(a, b) {
-  if (a == 0) {
-    realName.firstName = 'Родриго';
+function showSolutionsMessage( a, b, c ) {
+  let result = getSolutions (a, b, c);
+  if (c > 0) {
+    console.log(`Вычисляем корни квадратного уравнения ${a}x² + ${b}x + ${c}`);
   } else {
-    realName.firstName = 'Эмильо';
+    console.log(`Вычисляем корни квадратного уравнения ${a}x² + ${b}x ${c}`);
   }
-  if (b == 0) {
-    realName.lastName = 'Родриго';
+  console.log(`Значение дискриминанта: ${solution.D}`);
+  if (solution.D < 0) {
+    console.log('Уравнение не имеет вещественных корней');
+  } else if (solution.D == 0) {
+    console.log(`Уравнение имеет один корень X₁: ${solution.roots}`);
   } else {
-    realName.lastName = 'Эмильо';
+    console.log(`Уравнение имеет два корня. X₁ = ${solution.roots[0]}, X₂ = ${solution.roots[1]}`)
   }
-  return(realName);
 }
-  
-  console.log(realName);
-}
-getPersonData(secretData)
+showSolutionsMessage(1, 2, -3)
