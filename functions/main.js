@@ -23,9 +23,14 @@ function getAverageScore(object) {
     let average = getCount (value);
     result[key] = average;
     arr.push(average);
-    result.total = getCount (arr);
   }
-  
+
+  let sum = 0;
+  for (let i = 0; i < arr.length; i++) {
+    sum = sum + arr[i];
+  }
+  result.total = sum / arr.length;
+  //console.log(total);
   //console.log(data);
   //console.log(arr);
   console.log(result);
