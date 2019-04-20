@@ -1,28 +1,10 @@
 // Задача № 1 "Решение квадратного уравнения"
 "use strict";
 
-let solution = new Object;
-
-function getSolutions(a, b, c) {
-  let d = Math.pow(b, 2) - 4 * a * c;
-  let x1, x2;
-  if (d < 0) {
-    solution.D = d;
-  } else if (d == 0) {
-    x1 = -b / (2 * a);
-    solution.D = d;
-    solution.roots = [x1];
-  } else {
-    x1 = (-b + Math.sqrt(d)) / (2 * a);
-    x2 = (-b - Math.sqrt(d)) / (2 * a);
-    solution.D = d;
-    solution.roots = [x1, x2];
-  }
-  //console.log(solution);
-  return solution;
-}
-
 function showSolutionsMessage( a, b, c ) {
+
+  let solution = new Object;
+
   let result = getSolutions (a, b, c);
   if (c > 0) {
     console.log(`Вычисляем корни квадратного уравнения ${a}x² + ${b}x + ${c}`);
@@ -37,12 +19,30 @@ function showSolutionsMessage( a, b, c ) {
   } else {
     console.log(`Уравнение имеет два корня. X₁ = ${solution.roots[0]}, X₂ = ${solution.roots[1]}`)
   }
+
+  function getSolutions(a, b, c) {
+    let d = Math.pow(b, 2) - 4 * a * c;
+    let x1, x2;
+    if (d < 0) {
+      solution.D = d;
+    } else if (d == 0) {
+      x1 = -b / (2 * a);
+      solution.D = d;
+      solution.roots = [x1];
+    } else {
+    x1 = (-b + Math.sqrt(d)) / (2 * a);
+    x2 = (-b - Math.sqrt(d)) / (2 * a);
+    solution.D = d;
+    solution.roots = [x1, x2];
+    }
+  //console.log(solution);
+  return solution;
+  }
+
 }
 showSolutionsMessage(1, 2, -3)
 
 //Задача № 2 "Эмильо и Родриго"
-"use strict";
-
 let secretData = {
     aaa: 0,
     bbb: 1
@@ -57,9 +57,9 @@ function getPersonData (obj) {
     let value = secretService (realName[key]);
     realName[key] = value;
   }
-  console.log(realName);
+  return (realName);
 }
-getPersonData(secretData)
+console.log(getPersonData(secretData));
 
 function secretService(a) {
   if (a == 0) {
@@ -70,8 +70,6 @@ function secretService(a) {
 }
 
 //Задача № 3 "Журнал успеваемости с итоговой оценкой"
-"use strict";
-
 let data = {
   algebra: [4, 3, 5, 4],
   geometry: [5, 4, 5, 4],
@@ -95,19 +93,12 @@ function getAverageScore(object) {
     let average = getCount (value);
     result[key] = average;
     arr.push(average);
+    result.total = getCount (arr);
   }
 
-  let sum = 0;
-  for (let i = 0; i < arr.length; i++) {
-    sum = sum + arr[i];
-  }
-  result.total = sum / arr.length;
-  //console.log(total);
-  //console.log(data);
-  //console.log(arr);
-  console.log(result);
+  return (result);
 }
-getAverageScore(data);
+console.log (getAverageScore(data));
 
 function getCount (arr) {
   let sum = 0;
