@@ -6,11 +6,7 @@ function showSolutionsMessage( a, b, c ) {
   let solution = new Object;
 
   let result = getSolutions (a, b, c);
-  if (c > 0) {
-    console.log(`Вычисляем корни квадратного уравнения ${a}x² + ${b}x + ${c}`);
-  } else {
-    console.log(`Вычисляем корни квадратного уравнения ${a}x² + ${b}x ${c}`);
-  }
+  console.log(`Вычисляем корни квадратного уравнения ${a}x² + ${b}x + ${c}`);
   console.log(`Значение дискриминанта: ${solution.D}`);
   if (solution.D < 0) {
     console.log('Уравнение не имеет вещественных корней');
@@ -40,34 +36,32 @@ function showSolutionsMessage( a, b, c ) {
   }
 
 }
-showSolutionsMessage(1, 2, -3)
+showSolutionsMessage(3, 4, 1)
 
 //Задача № 2 "Эмильо и Родриго"
-let secretData = {
-    aaa: 0,
-    bbb: 1
-};
+function getPersonData () {
+  let realName = { 
+    firstName: 1,
+    lastName: 1
+  };
+  secretService (realName.firstName, realName.lastName);
+  return (realName)
 
-function getPersonData (obj) {
-  let realName = {};
-  realName.firstName = obj.aaa;
-  realName.lastName = obj.bbb;
-
-  for (let key in realName) {
-    let value = secretService (realName[key]);
-    realName[key] = value;
-  }
-  return (realName);
-}
-console.log(getPersonData(secretData));
-
-function secretService(a) {
-  if (a == 0) {
-    return 'Родриго'
-  } else {
-    return 'Эмильо'
+  function secretService(a, b) {
+    if (a == 0) {
+      realName.firstName = 'Родриго'
+    } else {
+      realName.firstName = 'Эмильо'
+    }
+    if (b == 0) {
+      realName.lastName = 'Родриго'
+    } else {
+      realName.lastName = 'Эмильо'
+    }
+  return
   }
 }
+console.log (getPersonData());
 
 //Задача № 3 "Журнал успеваемости с итоговой оценкой"
 let data = {
@@ -84,18 +78,19 @@ let data = {
 };
 
 function getAverageScore(object) {
-  let arr = [];
   let result = {};
-  
+  let count = 0;
+  let total = 0;
+
   for (let key in object) {
     let value = object[key];
     result[key] = object[key];
     let average = getCount (value);
     result[key] = average;
-    arr.push(average);
-    result.total = getCount (arr);
+    total += average;
+    count++;
   }
-
+  result.total = total / count;
   return (result);
 }
 console.log (getAverageScore(data));
