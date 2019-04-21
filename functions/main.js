@@ -41,27 +41,22 @@ showSolutionsMessage(3, 4, 1)
 //Задача № 2 "Эмильо и Родриго"
 function getPersonData () {
   let realName = { 
-    firstName: 1,
+    firstName: 0,
     lastName: 1
   };
-  secretService (realName.firstName, realName.lastName);
+  realName.firstName = secretService (realName.firstName);
+  realName.lastName = secretService (realName.lastName);
   return (realName)
-
-  function secretService(a, b) {
-    if (a == 0) {
-      realName.firstName = 'Родриго'
-    } else {
-      realName.firstName = 'Эмильо'
-    }
-    if (b == 0) {
-      realName.lastName = 'Родриго'
-    } else {
-      realName.lastName = 'Эмильо'
-    }
-  return
-  }
 }
 console.log (getPersonData());
+
+function secretService(a) {
+  if (a == 0) {
+    return 'Родриго'
+  } else {
+    return 'Эмильо'
+  }
+}
 
 //Задача № 3 "Журнал успеваемости с итоговой оценкой"
 let data = {
@@ -83,11 +78,9 @@ function getAverageScore(object) {
   let total = 0;
 
   for (let key in object) {
-    let value = object[key];
     result[key] = object[key];
-    let average = getCount (value);
-    result[key] = average;
-    total += average;
+    result[key] = getCount (object[key]);
+    total += result[key];
     count++;
   }
   result.total = total / count;
