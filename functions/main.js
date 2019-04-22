@@ -39,16 +39,18 @@ function showSolutionsMessage( a, b, c ) {
 showSolutionsMessage(3, 4, 1)
 
 //Задача № 2 "Эмильо и Родриго"
-function getPersonData () {
-  let realName = { 
-    firstName: 0,
-    lastName: 1
-  };
-  realName.firstName = secretService (realName.firstName);
-  realName.lastName = secretService (realName.lastName);
+let secretData = {
+  aaa: 0,
+  bbb: 1
+}
+
+function getPersonData (secret) {
+  let realName = {};
+  realName.firstName = secretService (secret.aaa);
+  realName.lastName = secretService (secret.bbb);
   return (realName)
 }
-console.log (getPersonData());
+console.log (getPersonData(secretData));
 
 function secretService(a) {
   if (a == 0) {
