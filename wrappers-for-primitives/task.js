@@ -14,6 +14,26 @@ function calculateMortgage() {
 function calculateTotalMortgage(percent, contribution, amount, date) {
 
     // код для задачи №1 писать здесь
+    console.log(`Процентная ставка ${percent} число`)
+    console.log(`Первоначальный взнос ${contribution}`)
+    console.log(`Сумма кредита ${amount}`);
+    let now = new Date();
+    let nowYear = now.getFullYear();
+    let nowMonth = now.getMonth();
+    console.log(`Текущий год ${nowYear} и месяц ${nowMonth}`);
+    let lastDate = new Date(date);
+    let lastDateYear = lastDate.getFullYear();
+    let lastDateMonth = lastDate.getMonth();
+    console.log(`Год ${lastDateYear} и месяц окончания: ${lastDateMonth}`);
+    if (lastDate < now) {
+        return "Срок окончания не может быть меньше текущей даты"
+    } else {
+        let periodYear = lastDateYear - nowYear;
+        let periodMonth = lastDateMonth - nowMonth;
+        let period = periodYear * 12 + periodMonth; //срок кредита в месяцах
+        console.log(`Срок кредита в месяцах ${period}`);
+    }
+    
     //return totalAmount;
 }
 
@@ -22,20 +42,19 @@ function sayHello() {
     let greeting = getGreeting(name);
     let span = window.helloResult;
     span.textContent = greeting;
+    console.log("Тип имени: " + typeof name);
 }
 
 function getGreeting(name) {
     // код для задачи №2 писать здесь
 
-    let string;
-    if (typeof name === 'string' && name != '') {
-        string = `Привет, мир! Меня зовут ${name}`;
+    let greeting;
+      if (!! name == true && name != 'undefined' && name != 'null' && typeof name != 'number') {
+        greeting = `Привет, мир! Меня зовут ${name}`;
     } else {
-        string = `Привет, мир! Меня зовут Аноним`;
+        greeting = `Привет, мир! Меня зовут Аноним`;
     }
-    return string;
+    console.log(typeof name);
+    return greeting;
 }
-console.log(getGreeting('Борис'))
-console.log(typeof 'Борис')
-
-    //return greeting;
+console.log(getGreeting(1))
