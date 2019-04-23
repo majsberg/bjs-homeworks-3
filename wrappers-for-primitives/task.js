@@ -17,6 +17,19 @@ function calculateTotalMortgage(percent, contribution, amount, date) {
     console.log(`Процентная ставка ${percent} число`)
     console.log(`Первоначальный взнос ${contribution}`)
     console.log(`Сумма кредита ${amount}`);
+
+    //проверка аргументов на NaN
+    if (isNaN(percent) == true) {
+        return `Параметр "Процентная ставка" содержит неправильное значение ${percent}`
+    }
+    if (isNaN(contribution) == true) {
+        return `Параметр "Первоначальный взнос" содержит неправильное значение ${contribution}`
+    }
+    if (isNaN(amount) == true) {
+        return `Параметр "Сумма кредита" содержит неправильное значение ${amount}`
+    }
+
+    //вычисление количества месяцев
     let now = new Date();
     let nowYear = now.getFullYear();
     let nowMonth = now.getMonth();
@@ -34,11 +47,13 @@ function calculateTotalMortgage(percent, contribution, amount, date) {
         period = periodYear * 12 + periodMonth; //срок кредита в месяцах
         console.log(`Срок кредита в месяцах ${period}`);
     }
+
+    //расчет
     let P = 1/12 * percent/100;
     let n = period;
     let S = amount - contribution;
     let MontAmount = S * (P + (P / (Math.pow((1 + P), n) - 1)));
-    let totalAmount = (MontAmount * 12).toFixed(2);
+    let totalAmount = (MontAmount * n).toFixed(2);
     console.log(`Итоговая сумма выплаты: ${totalAmount}`);
     return totalAmount;
 }
