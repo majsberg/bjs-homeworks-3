@@ -25,16 +25,22 @@ function calculateTotalMortgage(percent, contribution, amount, date) {
     let lastDateYear = lastDate.getFullYear();
     let lastDateMonth = lastDate.getMonth();
     console.log(`Год ${lastDateYear} и месяц окончания: ${lastDateMonth}`);
+    let period = 0; // переменная для срока кредита в месяцах
     if (lastDate < now) {
         return "Срок окончания не может быть меньше текущей даты"
     } else {
         let periodYear = lastDateYear - nowYear;
         let periodMonth = lastDateMonth - nowMonth;
-        let period = periodYear * 12 + periodMonth; //срок кредита в месяцах
+        period = periodYear * 12 + periodMonth; //срок кредита в месяцах
         console.log(`Срок кредита в месяцах ${period}`);
     }
-    
-    //return totalAmount;
+    let P = 1/12 * percent/100;
+    let n = period;
+    let S = amount - contribution;
+    let MontAmount = S * (P + (P / (Math.pow((1 + P), n) - 1)));
+    let totalAmount = (MontAmount * 12).toFixed(2);
+    console.log(`Итоговая сумма выплаты: ${totalAmount}`);
+    return totalAmount;
 }
 
 function sayHello() {
