@@ -7,11 +7,12 @@ function initCheckBirthday() {
 }
 
 function checkBirthday(birthday) {
-    // код для задачи №1 писать здесь
+    // код для задачи №3(это задача со звёздочкой *) писать здесь
 }
 
 function initPrintAnimalSound() {
     const animal = {
+        //sound: undefined,
         sound: 'grrrr',
     };
 
@@ -21,7 +22,15 @@ function initPrintAnimalSound() {
 }
 
 function getAnimalSound(animal) {
-    // код для задачи №2 писать здесь
+    // код для задачи №1 писать здесь
+    let sound = animal.sound;
+    if (sound == undefined) {
+        console.log(null)
+        return null
+    } else {
+        console.log(sound);
+        return sound
+    }
 }
 
 function initCalculateStatement() {
@@ -35,5 +44,18 @@ function initCalculateStatement() {
 }
 
 function getAverageMark(marks) {
-    // код для задачи №3 писать здесь
+    // код для задачи №2 писать здесь
+
+    let sum = 0;
+    let count = 0;
+    for (i = 0; i < marks.length; i++) {
+        marks[i] = parseInt (marks[i]);
+        sum = sum + marks[i];
+        count = count + 1;
+    }
+    let average = sum / count;
+    console.log(average);
+    let roundedAverage = Math.round(average);
+    console.log(roundedAverage);
+    return roundedAverage
 }
