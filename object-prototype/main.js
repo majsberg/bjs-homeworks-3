@@ -1,3 +1,5 @@
+"use strict";
+
 function initCheckBirthday() {
     const birthday = document.getElementById('birthday').value;
 
@@ -8,6 +10,16 @@ function initCheckBirthday() {
 
 function checkBirthday(birthday) {
     // код для задачи №3(это задача со звёздочкой *) писать здесь
+    let now = new Date().getTime();
+    console.log(now);
+    birthday = new Date(birthday).getTime();
+    console.log(birthday);
+    let diff = now - birthday;
+    let age = diff / 31536000000;
+    console.log(age);
+    if (age > 18) {
+        return age;
+    }
 }
 
 function initPrintAnimalSound() {
@@ -48,7 +60,7 @@ function getAverageMark(marks) {
 
     let sum = 0;
     let count = 0;
-    for (i = 0; i < marks.length; i++) {
+    for (let i = 0; i < marks.length; i++) {
         marks[i] = parseInt (marks[i]);
         sum = sum + marks[i];
         count = count + 1;
