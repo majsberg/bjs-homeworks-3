@@ -3,25 +3,22 @@
 //=================================================ПЕРВАЯ ЗАДАЧА=================================================//
 
 class Weapon {
-	constructor(name, attack, durability, range) {
+	constructor (name, attack, durability, range) {
 		this.name = name;
 		this.attack = attack;
-		this.durability = durability;
+		this.durabilityFirst = durability;
 		this.range = range;
-		this.durabilityFirst = 0;
+		this.durability = durability;
 	}
 
-	takeDamage = function(damage) {
-		let difference = this.durability - damage;
-		if (difference < 0) {
-			differencek = 0
+	takeDamage (damage) {
+		this.durability = this.durability - damage;
+		if (this.durability < 0) {
+			this.durability = 0
 		} 
-		this.durabilityFirst = this.durability;
-		this.durability = difference;
-		return
 	}
 
-	getDamage = function() {
+	getDamage () {
 		if (this.durability >= this.durabilityFirst * 0.3) {
 			this.attack = this.attack
 		} else if (this.durability == 0) {
@@ -29,27 +26,20 @@ class Weapon {
 		} else {
 			this.attack = this.attack / 2
 		}
-		return
+		//return
 	}
 
-	isBroken = function() {
-		if (this.durability > 0) {
-			return false
-		} else {
-			return true
-		}
+	isBroken () {
+		return (this.durability > 0);
 	}
 }
 
-
-/*const arm = new Weapon ("Рука", 1, Infinity, 1);
-console.log(arm);
+/*
+const arm = new Weapon ("Рука", 1, Infinity, 1);
 
 const bow = new Weapon ("Лук", 10, 200, 3);
-console.log(bow);
 
 const sword = new Weapon ("Старый меч", 25, 500, 1);
-console.log(sword.name + ", атака: " + sword.attack + ", прочность: " + sword.durability + ", уровень: " + sword.range);
 
 const knife = new Weapon ("Нож", 5, 300, 1);
 
@@ -61,120 +51,132 @@ const axe = new Weapon ("Секира", 27, 800, 1);
 
 const stormStaff = new Weapon ("Посох Бури", 10, 300, 3);
 
-arm.takeDamage(20);
-console.log("Прочность оружия: " + arm.durability + " , история прочности: " + arm.durabilityArr);
-
-arm.getDamage();
-console.log("Урон от удара: " + arm.attack);
-
-sword.takeDamage(20);
-console.log("Прочность оружия: " + sword.durability + " , история прочности: " + sword.durabilityArr);
+sword.takeDamage(200);
+console.log("Начальная прочность оружия: " + sword.durabilityFirst + " , текущая прочность: " + sword.durability);
 
 sword.getDamage();
 console.log("Урон от удара: " + sword.attack);
 
-sword.takeDamage(20);
-console.log("Прочность оружия: " + sword.durability + " , история прочности: " + sword.durabilityArr);
+sword.takeDamage(400);
+console.log("Начальная прочность оружия: " + sword.durabilityFirst + " , текущая прочность: " + sword.durability);
 
 sword.getDamage();
 console.log("Урон от удара: " + sword.attack);
 
-console.log(arm.isBroken())*/
+sword.isBroken();
+console.log("Сломано ли оружие " + sword.isBroken());
+*/
 
 //=================================================ВТОРАЯ ЗАДАЧА=================================================//
 
 class Sword extends Weapon {
 	constructor () {
-		super();
-		this.name = "Старый меч";
-		this.attack = 25;
-		this.durability = 500;
-		this.range = 1;
-		this.durabilityFirst;
+		super ("Старый меч", 25, 500, 1);
 	}
 }
-const sword = new Sword();
-sword.takeDamage(500);
-console.log(sword);
 
 class Arm extends Weapon {
-	constructor (Weapon) {
-		super();
-		this.name = "Рука";
-		this.attack = 1;
-		this.durability = Infinity;
-		this.range = 1;
-		this.durabilityFirst;
+	constructor () {
+		super ("Рука", 1, Infinity, 1);
 	}
 }
 
 class Bow extends Weapon {
-	constructor (Weapon) {
-		super();
-		this.name = "Лук";
-		this.attack = 10;
-		this.durability = 200;
-		this.range = 3;
-		this.durabilityFirst;
+	constructor () {
+		super ("Лук", 10, 200, 3);
 	}
 }
 
 class Knife extends Weapon {
-	constructor (Weapon) {
-		super();
-		this.name = "Нож";
-		this.attack = 5;
-		this.durability = 300;
-		this.range = 1;
-		this.ddurabilityFirst;
+	constructor () {
+		super ("Нож", 5, 300, 1);
 	}
 }
 
 class Staff extends Weapon {
-	constructor (Weapon) {
-		super();
-		this.name = "Посох";
-		this.attack = 8;
-		this.durability = 300;
-		this.range = 1;
-		this.durabilityFirst;
+	constructor () {
+		super ("Посох", 8, 300, 1);
 	}
 }
 
 class Axe extends Sword {
-	constructor (Weapon) {
-		super();
+	constructor () {
+		super ();
 		this.name = "Секира";
 		this.attack = 27;
 		this.durability = 800;
 		this.range = 1;
-		this.durabilityFirst;
+		this.durabilityFirst = 800;
 	}
 }
 
+const axe = new Axe;
+axe.takeDamage(400);
+console.log(axe);
+console.log(axe.isBroken());
+console.log("Начальная прочность оружия: " + axe.durabilityFirst + " , текущая прочность: " + axe.durability);
+
 
 class LongBow extends Bow {
-	constructor (Weapon) {
-		super();
+	constructor () {
+		super ();
 		this.name = "Длинный лук";
 		this.attack = 15;
 		this.durability = 200;
 		this.range = 4;
-		this.durabilityFirst;
+		this.durabilityFirst = 200;
 	}
 }
 
 class StormStaff extends Staff {
-	constructor (Weapon) {
-		super();
+	constructor () {
+		super ();
 		this.name = "Посох бури";
 		this.attack = 10;
 		this.durability = 300;
 		this.range = 3;
-		this.durabilityFirst;
+		this.durabilityFirst = 300;
 	}
 }
 
+//=================================================ТРЕТЬЯ ЗАДАЧА=================================================//
+class StudentLog {
+	constructor (name) {
+		this.name = name;
+		this.data = {};	
+		this.data.grades = [];
+	}
 
+	getName () {
+		return (this.name); 
+	}
 
+	addGrade (grade, subject) {
+		let count = 0;
+		if (typeof grade != "number" || grade < 1 || grade > 5) {
+			console.log(`Вы пытались поставить оценку "${grade}" по предмету ${subject}. Допускаются только числа от 1 до 5.`);
+		} else {
+			//console.log(`Вы поставили оценку "${grade}" по предмету ${subject}`);
+			this.data.subject = subject;
+			this.data.grades.push(grade);
+			count++;
+		}
+		return count;
+	}
 
+	getAverageBySubject (subject) {
+
+	}
+
+	getTotalAverage () {
+
+	}
+}
+
+const name = new StudentLog ('Дмитрий Харламов');
+console.log(name.getName());
+console.log(name.addGrade("Супер", "Алгебра"));
+console.log(name.addGrade("Хорошо", "Алгебра"));
+console.log(name.addGrade("Хорошо", "Геометрия"));
+//console.log(name.addGrade(5, "Алгебра"));
+console.log(name);
