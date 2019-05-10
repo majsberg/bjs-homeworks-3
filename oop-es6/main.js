@@ -20,17 +20,16 @@ class Weapon {
 
 	getDamage () {
 		if (this.durability >= this.durabilityFirst * 0.3) {
-			this.attack = this.attack
+			return this.attack
 		} else if (this.durability == 0) {
-			this.attack = 0
+			return 0
 		} else {
-			this.attack = this.attack / 2
+			return this.attack / 2
 		}
-		return (this.attack);
 	}
 
 	isBroken () {
-		return (this.durability < 0);
+		return (this.durability == 0);
 	}
 }
 
@@ -111,7 +110,8 @@ class Axe extends Sword {
 }
 
 const axe = new Axe;
-axe.takeDamage(400);
+axe.takeDamage(700);
+console.log(axe.getDamage());
 console.log(axe);
 console.log(axe.isBroken());
 console.log("Начальная прочность оружия: " + axe.durabilityFirst + " , текущая прочность: " + axe.durability);
