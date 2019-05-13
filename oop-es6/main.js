@@ -143,6 +143,8 @@ class StormStaff extends Staff {
 class StudentLog {
   constructor(name) {
     this.name = name;
+    this.data = new Object;
+    this.data.arr = new Array;
   }
 
   getName() {
@@ -153,73 +155,61 @@ class StudentLog {
     let count = 0;
     if (typeof grade != "number" || grade < 1 || grade > 5) {
 			console.log(`Вы пытались поставить оценку '${grade}' по предмету '${subject}'. Допускаются только числа от 1 до 5.`);
-    } else {
-      if (typeof this.data == 'undefined') {
-        this.data = new Object;
-        this.data.arr = new Array;
-
-        for (let key in this.data) {
-          key = subject;
-          this.data[key] = [grade];
-          count++;
-        }
-        delete this.data.arr;
-  
-      } else {
-        for (let key in this.data) {
-          if (key == subject) {
-            this.data[key].push(grade);
-          } else {
-            key = subject;
-            this.data[key] = [grade];
-          }
-          count++;
-        }
-      }
       return count;
     }
-  }
-
-  getAverageBySubject(subject) {
-    let checkPoint = 0;
-    for (let key in this.data) {
-      if (key == subject) {
-        let arr = this.data[key];
-        let sum = 0;
-        let count = 0;
-        for (let i = 0; i < arr.length; i++) {
-          sum += arr[i];
-          count++;
+    
+    if (subject in this.data) {
+      for (let key in this.data) {
+        if (key == subject) {
+          this.data[key].push(grade);
         }
-        let average = sum / count;
-        console.log(`Средняя оценка по предмету '${subject}' равна ${average}`);
-        checkPoint++;
+      }
+    } else {
+      for (let key in this.data) {
+        key = subject;
+        this.data[key] = [grade];
       }
     }
-    if (checkPoint == 0) {
+    count++;
+    return count;
+  }
+    
+  getAverageBySubject(subject) {
+    if (subject in this.data) {
+      for (let key in this.data) {
+        if (key == subject) {
+          let arr = this.data[key];
+          let sum = 0;
+          let count = 0;
+          for (let i = 0; i < arr.length; i++) {
+            sum += arr[i];
+            count++;
+          }
+          let average = sum / count;
+          return average;
+        }
+      }
+    } else {
       console.log(`Предмет ${subject} не найден`);
-    }
+    }  
   }
 
   getTotalAverage() {
+    let arrAverage = [];
     let sum = 0;
-    let count = 0;
-    for (let key in this.data) {
-      let arr = this.data[key];
-      
-      for (let i = 0; i < arr.length; i++) {
-        sum += arr[i];
-        count++;
-      }
-      
-    }
-    let average = sum / count;
-    average = average.toFixed(1);
-    console.log(`Средняя оценка по всем предметам равна ${average}`);
+    arrAverage.push(name.getAverageBySubject("История"));
+    sum += name.getAverageBySubject("История");
+
+    arrAverage.push(name.getAverageBySubject("Русский язык"));
+    sum += name.getAverageBySubject("Русский язык");
+
+    arrAverage.push(name.getAverageBySubject("Алгебра"));
+    sum += name.getAverageBySubject("Алгебра");
+
+    let average = sum / arrAverage.length;
+    console.log(`Средняя оценка по всем предметам равна ${average.toFixed(1)}`);
     return average;
   }
-
-
 }
 
 const name = new StudentLog ("Игорь Сергеев");
@@ -227,11 +217,7 @@ name.addGrade(5, "Алгебра");
 name.addGrade(4, "Алгебра");
 name.addGrade(5, "Геометрия");
 name.addGrade(4, "Информатика");
-name.addGrade(4, "Русский язык");
 name.addGrade(5, "Русский язык");
-name.getAverageBySubject("Алгебра");
-name.getAverageBySubject("Русский язык");
-name.getAverageBySubject("История");
-name.getTotalAverage();
+name.addGrade(3, "История");
 
-//console.log(name);
+name.getTotalAverage();
